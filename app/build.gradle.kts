@@ -60,15 +60,21 @@ dependencies {
     androidTestImplementation(libs.androidx.ui.test.junit4)
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
+    implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.6.1")
+
 
 
     // Coroutine - arkaplanda veri çekmek için
     implementation(libs.kotlinx.coroutines.android)
 
     // MPAndroidChart - grafik çizimi için
-    implementation(libs.mpandroidchart)
+    //implementation(libs.mpandroidchart) // Bunu yorum satırı yapın veya silin
     implementation(libs.retrofit2)
     implementation(libs.gsonconverter)
+    implementation(libs.mpandroidchart)
+
+
+
 
 
 }

@@ -6,8 +6,8 @@ import androidx.activity.compose.setContent
 import androidx.activity.viewModels
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.*
-import androidx.compose.runtime.*
-import androidx.compose.ui.Alignment
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.example.secondproject.ui.theme.SecondProjectTheme
@@ -23,20 +23,30 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    BitcoinPriceScreen(viewModel)
+                    BitcoinGraphScreen(viewModel)
                 }
             }
         }
     }
 }
-@Composable
-fun BitcoinPriceScreen(viewModel: BitcoinViewModel) {
-    val price by viewModel.price.collectAsState()
 
-    Surface {
+@Composable
+fun BitcoinPriceListScreen(viewModel: BitcoinViewModel) {
+    val prices = viewModel.priceList.collectAsState().value
+
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(16.dp)
+    ) {
         Text(
-            text = "Bitcoin Fiyatı: $price",
-            style = MaterialTheme.typography.headlineMedium
+            text = "Bitcoin Fiyatları (Son 10 saniye)",
+            style = MaterialTheme.typography.headlineMedium,
+            modifier = Modifier.padding(bottom = 16.dp)
         )
+
+        prices.forEach { price ->
+            Text(text = "$price ₺", style = MaterialTheme.typography.bodyLarge)
+        }
     }
 }
